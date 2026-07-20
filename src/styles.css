@@ -1,0 +1,245 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-cyan: var(--brand-cyan);
+
+  --font-sans: "Segoe UI", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Segoe UI", "Inter", sans-serif;
+  --font-mono:
+    "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* VS Code Dark+ palette */
+  --background: oklch(0.22 0.005 260); /* #1e1e1e editor bg */
+  --foreground: oklch(0.86 0.005 260); /* #d4d4d4 editor fg */
+
+  --card: oklch(0.26 0.006 260 / 0.85); /* #252526 sidebar */
+  --card-foreground: oklch(0.86 0.005 260);
+
+  --muted: oklch(0.3 0.006 260); /* #333333 */
+  --muted-foreground: oklch(0.65 0.008 260); /* #969696 comments/desc */
+
+  --primary: oklch(0.62 0.15 245); /* #007acc activity blue */
+  --primary-foreground: oklch(0.98 0 0);
+
+  --accent: oklch(0.7 0.13 245); /* focus blue */
+  --accent-foreground: oklch(0.98 0 0);
+
+  --border: oklch(1 0 0 / 8%); /* #3c3c3c ish */
+  --ring: oklch(0.62 0.15 245);
+
+  /* VS Code syntax accents */
+  --vs-blue: oklch(0.62 0.15 245); /* #007acc activity bar */
+  --vs-blue-2: oklch(0.72 0.13 245); /* #4fc1ff / #569cd6 keywords */
+  --vs-cyan: oklch(0.82 0.11 200); /* #4ec9b0 types */
+  --vs-yellow: oklch(0.85 0.13 90); /* #dcdcaa functions */
+  --vs-orange: oklch(0.75 0.15 55); /* #ce9178 strings */
+  --vs-purple: oklch(0.72 0.13 305); /* #c586c0 control */
+  --vs-green: oklch(0.72 0.14 145); /* #6a9955 comments */
+  --vs-red: oklch(0.68 0.19 25); /* #f48771 error */
+
+  /* Titlebar / statusbar */
+  --vs-titlebar: oklch(0.28 0.005 260); /* #3c3c3c */
+  --vs-statusbar: oklch(0.62 0.15 245); /* #007acc */
+  --vs-activitybar: oklch(0.28 0.005 260); /* #333333 */
+
+  /* Aliases so existing components keep working */
+  --brand-blue: var(--vs-blue-2);
+  --brand-purple: var(--vs-purple);
+  --brand-cyan: var(--vs-cyan);
+
+  --gradient-brand: linear-gradient(135deg, var(--vs-blue), var(--vs-blue-2));
+  --gradient-brand-soft: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--vs-blue) 22%, transparent),
+    color-mix(in oklab, var(--vs-cyan) 22%, transparent)
+  );
+  --gradient-hero:
+    radial-gradient(
+      ellipse 70% 55% at 15% 5%,
+      color-mix(in oklab, var(--vs-blue) 25%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 55% at 90% 15%,
+      color-mix(in oklab, var(--vs-purple) 18%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 50% 100%,
+      color-mix(in oklab, var(--vs-cyan) 12%, transparent),
+      transparent 60%
+    );
+
+  --shadow-glow: 0 18px 50px -18px
+    color-mix(in oklab, var(--vs-blue) 60%, transparent);
+  --shadow-card: 0 10px 40px -14px oklch(0 0 0 / 0.7);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand-purple) 60%, transparent);
+    color: white;
+  }
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--card) 65%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+@utility glass-strong {
+  background: color-mix(in oklab, oklch(0.2 0.02 265) 75%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--color-border);
+}
+
+@utility text-gradient {
+  background: var(--gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: white;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-glow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+  }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--card) 40%, transparent);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--brand-blue) 60%, transparent);
+    background: color-mix(in oklab, var(--brand-blue) 12%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@utility animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@utility animate-blob {
+  animation: blob 18s ease-in-out infinite;
+}
+
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@utility animate-caret {
+  animation: caret 1s step-end infinite;
+}
