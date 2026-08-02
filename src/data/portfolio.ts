@@ -115,14 +115,14 @@ export const internship = {
 
 export const projects = [
   {
-    title: "Student Management CRUD Application",
+    title: "Product Management CRUD Application",
     description:
-      "A full-stack CRUD application built with a React.js frontend and Java Spring Boot backend. Users can create, read, update, and delete student records through a clean, responsive interface backed by REST APIs.",
+      "A full-stack CRUD application built with a React.js frontend and Java Spring Boot backend. Users can create, read, update, and delete Product records through a clean, responsive interface backed by REST APIs.",
     features: [
-      "Create Student",
-      "Read Student Details",
-      "Update Student",
-      "Delete Student",
+      "Create Product",
+      "Read Product Details",
+      "Update product",
+      "Delete Product",
       "REST API Integration",
       "Responsive UI",
     ],
